@@ -1,0 +1,839 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/global.css" />
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+			}
+			
+			.mui-table-view:before {
+				position: absolute;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+				top: -1px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+				top: -1px;
+			}
+			
+			.mui-table-view-cell:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: rgba(102, 254, 203, 1);
+			}
+			
+			.mui-icon-back:before,
+			.mui-icon-left-nav:before {
+				content: '\e471';
+				font-size: 22px;
+			}
+			
+			.mui-content {
+				height: 100%;
+			}
+			
+			.mui-popover .mui-popover-arrow.mui-bottom {
+				top: 109%;
+				left: -26px;
+				margin-top: -1px;
+			}
+			
+			ul,
+			menu,
+			dir {
+				display: block;
+				list-style-type: disc;
+				-webkit-margin-before: 0px;
+				-webkit-margin-after: 0px;
+				-webkit-margin-start: 0px;
+				-webkit-margin-end: 0px;
+				-webkit-padding-start: 0px;
+			}
+			
+			.mui-input-group:before {
+				background-color: transparent;
+			}
+			
+			.mui-input-group:after {
+				background-color: transparent;
+			}
+			
+			#showDealPopover {
+				height: 100px;
+			}
+			
+			.md-header {
+				color: white;
+			}
+			
+			.md-header-title-size {
+				font-size: 24px;
+			}
+			
+			.md-header-back-size {
+				font-size: 18px !important;
+			}
+			
+			.md-ul-li {
+				width: 80%;
+				margin: auto;
+				margin-top: 20px;
+				text-align: center;
+				background-color: rgba(0, 30, 68, 1);
+				border-radius: 50px;
+				border: solid 1px rgba(0, 30, 68, 1);
+			}
+			
+			.md-ul-li-active {
+				width: 80%;
+				margin: auto;
+				text-align: center;
+				margin-top: 20px;
+				background-color: rgba(102, 254, 203, 1);
+				border-radius: 50px;
+				border: solid 1px rgba(102, 254, 203, 1);
+			}
+			
+			.md-input-border {
+				display: flex;
+				width: 80%;
+				margin: auto;
+				margin-top: 20px;
+				border: solid 1px white;
+				border-radius: 10px;
+			}
+			
+			.md-center {
+				display: flex;
+				justify-content: center;
+				align-items: Center;
+			}
+			
+			.md-temp-color {
+				color: white;
+			}
+			
+			.md-alert-type-red {
+				width: 60px;
+				height: 60px;
+				margin-top: 10px;
+				margin-left: 5px;
+				margin-bottom: 10px;
+				border-radius: 200px;
+				background-color: rgba(255, 1, 0, 1);
+				box-shadow: 0px 0px 30px rgba(255, 1, 0, 1);
+				border: 3px solid rgba(255, 135, 143, 1)
+			}
+			
+			.md-alert-type-yellow {
+				width: 60px;
+				height: 60px;
+				margin-top: 10px;
+				margin-left: 5px;
+				margin-bottom: 10px;
+				border-radius: 200px;
+				background-color: rgba(251, 255, 0, 1);
+				box-shadow: 0px 0px 30px rgb(139, 175, 99);
+				border: 1px solid rgb(139, 175, 99)
+			}
+			
+			.md-alert-type {
+				width: 60px;
+				height: 60px;
+				margin-top: 10px;
+				margin-left: 5px;
+				margin-bottom: 10px;
+				border-radius: 200px;
+				background-color: #00ff6f;
+				box-shadow: 0px 0px 30px green;
+				border: 1px solid green
+			}
+			
+			.md-cicle {
+				font-size: 24px;
+				color: white;
+				margin-left: 20px;
+			}
+			
+			.md-btn-out {
+				position: absolute;
+				width: 100%;
+				bottom: 40px;
+			}
+			
+			.md-bottom-alert-type {
+				width: 80px;
+				height: 80px;
+				border-radius: 200px;
+				border: 5px solid rgba(190, 180, 144, 1)
+			}
+			
+			.md-bottom-cancel-alert-type {
+				width: 80px;
+				height: 80px;
+				border-radius: 200px;
+				border: 5px solid rgba(95, 252, 197, 1)
+			}
+			
+			.box-shadow-out {
+				-moz-box-shadow: 0 1px 10px 10px rgba(18, 32, 71, 1) inset;
+				/* For Firefox3.6+ */
+				-webkit-box-shadow: 0 1px 10px 10px rgba(18, 32, 71, 1) inset;
+				/* For Chrome5+, Safari5+ */
+				box-shadow: 0px 7px 5px rgba(18, 32, 71, 1);
+				/* For Latest Opera */
+			}
+			
+			.md-bottm-btn-backg {
+				width: 80%;
+				height: 150px;
+				margin: auto;
+				display: flex;
+				background: rgba(18, 32, 71, 1);
+				border-radius: 4px;
+				box-shadow: 0 0 0 12px rgba(28, 77, 120, 1);
+				outline: 6px solid rgba(28, 77, 120, 1);
+			}
+			
+			.md-btn-common {
+				flex: 1;
+				border: 1px solid transparent;
+				background-color: rgba(35, 118, 196, 1);
+				margin: 3px;
+			}
+			
+			.md-btn-item-one {
+				border-bottom-left-radius: 10px;
+				border-top-left-radius: 10px;
+			}
+			
+			.md-btn-item-two {
+				border-radius: 0px;
+			}
+			
+			.md-btn-item-three {
+				border-bottom-right-radius: 10px;
+				border-top-right-radius: 10px;
+			}
+			
+			.md-left-arrow {
+				position: absolute;
+				right: 4%;
+				font-size: 48px;
+			}
+			
+			.md-left-arrow2 {
+				position: absolute;
+				right: 6%;
+				font-size: 48px;
+			}
+			
+			.md-background {
+				background-color: transparent;
+			}
+			
+			.arrow_border {
+				animation: glow 800ms ease-out infinite alternate;
+			}
+			
+			@keyframes glow {
+				0% {
+					border-color: #393;
+					box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1), 0 1px 0 #393;
+				}
+				100% {
+					border-color: #6f6;
+					box-shadow: 0 0 20px rgba(0, 255, 0, .6), inset 0 0 10px rgba(0, 255, 0, .4), 0 1px 0 #6f6;
+				}
+			}
+			
+			.md-ul {
+				width: 80%;
+				margin: auto;
+				background-color: transparent;
+				border: solid 1px white;
+				border-radius: 10px;
+			}
+			
+			.md-ul2 {
+				width: 80%;
+				margin: auto;
+				margin-top: 20px;
+				background-color: transparent;
+				border: solid 1px white;
+				border-radius: 10px;
+			}
+			
+			.md-ul3 {
+				width: 80%;
+				margin: auto;
+				margin-top: 20px;
+				background-color: transparent;
+				border: solid 1px white;
+				border-radius: 10px;
+			}
+			
+			.md-ul-new-li {
+				width: 100%;
+				display: flex;
+				border: 0;
+				margin-top: 0px;
+			}
+			
+			#cd-timeline {
+				position: relative;
+				margin-top: 2em;
+				margin-bottom: 2em;
+			}
+			
+			#cd-timeline::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 38px;
+				height: 100%;
+				width: 2px;
+				background: #d7e4ed;
+			}
+			
+			.cd-timeline-block {
+				position: relative;
+			}
+			
+			.cd-timeline-img {
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+			}
+			
+			.cd-timeline-img img {
+				display: block;
+				width: 40px;
+				height: 40px;
+				position: relative;
+			}
+			
+			img {
+				max-width: 100%;
+			}
+			
+			#ensure {
+				position: absolute;
+				left: 10% !important;
+				top: 20%;
+				width: 80%;
+				height: 60%;
+			}
+			
+			.md-center-form {
+				width: 60%;
+				height: 50%;
+			}
+			
+			.md-andon {
+				text-align: center;
+				font-size: 48px;
+				font-style: oblique;
+				color: white;
+				margin-bottom: 20px;
+			}
+			
+			.md-input-group {
+				border: solid 1px white;
+				border-radius: 50px;
+				margin-bottom: 20px;
+				color: white;
+			}
+			
+			.md-input-group:last-child {}
+			
+			.md-label-input-split {
+				width: 20% !important;
+				text-align: center;
+				font-size: 12px;
+				border-right-style: solid;
+				border-right-width: 1px;
+				border-right-color: white;
+			}
+			
+			.md-btn-inner2 {
+				width: 60%;
+				height: 45px;
+				margin: auto;
+				margin-top: 80px;
+				font-size: 24px;
+				color: black;
+				border: 1px solid rgba(102, 254, 203, 1);
+				border-radius: 50px;
+				background-color: rgba(102, 254, 203, 1);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="station">
+			<header class="mui-bar mui-bar-nav md-background">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left md-header md-header-back-size">返回</a>
+				<h1 class="mui-title md-header md-header-title-size" v-text="title"></h1>
+			</header>
+			<div class="mui-content background">
+				<section id="cd-timeline" class="cd-container">
+					<div v-show="isCall" style="display: flex;" id="alertStatusOne">
+						<div class="" style="margin-left:20px;margin-right:20px;text-align: center;">
+							<div class="cd-timeline-block" @tap="onTapSelfLogo">
+								<div class="cd-timeline-img">
+									<img style="height: 40px;width: 40px;border-radius: 200px;" src="../../../img/face.jpg" />
+								</div>
+							</div>
+						</div>
+						<ul class="mui-table-view md-ul" :class="{'arrow_border':isActiveOne}">
+							<li class="mui-table-view-cell callIndex" style="background-color: transparent;border-radius: 10px;">
+								<div class="mui-slider-right mui-disabled">
+									<a class="mui-btn mui-btn-grey" v-on:tap.stop="onTapUpQuick('0')">快反</a>
+									<a class="mui-btn mui-btn-yellow" v-on:tap.stop = "onTapMorningMeeting('0')">晨会</a>
+								</div>
+								<div class="mui-slider-handle md-background" style="    background-color: transparent;">
+									<div class="md-ul-new-li" style="width: 100%;">
+										<div class="md-center md-temp-color md-alert-type-red"></div>
+										<div class="md-center md-cicle">呼叫：
+										</div>
+										<div>
+											<div style="">
+												<p style="flex: 1;color: white;">报警：2018-07-08 09:22:08</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">向德山</p>
+												<p style="flex: 1;color: white;">车间1</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex:1;color: white;">产线1</p>
+												<p style="flex: 1;color: white;">工位1</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">设备</p>
+												<p style="flex: 1;color: white;">机器损坏</p>
+											</div>
+										</div>
+										<div class="md-center md-temp-color">
+											<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<!--<div class="md-input-border" :class="{'arrow_border':isActiveOne}" @longTap="onLongTapPopover('alertStatusOne')">
+						<div class="md-center md-temp-color md-alert-type-red"></div>
+						<div class="md-center md-cicle">呼叫：
+						</div>
+						<div>
+							<div style="">
+								<p style="flex: 1;color: white;">报警：2018-07-08 09:22:08</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">车间1</p>
+								<p style="flex:1;color: white;">产线1</p>
+								<p style="color: white;">工位1</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">设备</p>
+								<p style="color: white;">机器损坏</p>
+							</div>
+						</div>
+						<div class="md-center md-temp-color">
+							<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+					</div>-->
+
+					</div>
+					<div v-show="isReceive" style="display: flex;" id="alertStatusTwo">
+						<!--<div class="md-center" style="margin-top: 20px;margin-left:20px;margin-right:20px;text-align: center;">
+						<div>
+							<img style="height: 50px;width: 50px;border-radius: 200px;" src="../../../img/face.jpg" />
+							<p>向德山</p>
+						</div>
+					</div>
+					<div class="md-input-border" :class="{'arrow_border':isActiveTwo}" @longTap="onLongTapPopover('alertStatusTwo')">
+						<div class="md-center md-temp-color md-alert-type-yellow"></div>
+						<div class="md-center md-cicle">接警：</div>
+						<div>
+							<div style="">
+								<p style="flex: 1;color: white;">接警：2018-07-08 09:22:08</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">车间1</p>
+								<p style="flex:1;color: white;">产线1</p>
+								<p style="color: white;">工位1</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">设备</p>
+								<p style="color: white;">机器损坏</p>
+							</div>
+						</div>
+						<div class="md-center md-temp-color">
+							<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+					</div>-->
+						<div class="" style="    margin-top: 20px;margin-left:20px;margin-right:20px;text-align: center;">
+							<div class="cd-timeline-block" @tap="onTapSelfLogo">
+								<div class="cd-timeline-img">
+									<img style="height: 40px;width: 40px;border-radius: 200px;" src="../../../img/face.jpg" />
+								</div>
+							</div>
+						</div>
+						<ul class="mui-table-view md-ul2" :class="{'arrow_border':isActiveTwo}">
+							<li class="mui-table-view-cell callIndex" style="background-color: transparent;border-radius: 10px;">
+								<div class="mui-slider-right mui-disabled">
+									<a class="mui-btn mui-btn-grey" v-on:tap.stop="onTapUpQuick('1')">快反</a>
+									<a class="mui-btn mui-btn-yellow" v-on:tap.stop = "onTapMorningMeeting('1')">晨会</a>
+								</div>
+								<div class="mui-slider-handle md-background" style="    background-color: transparent;">
+									<div class="md-ul-new-li" style="width: 100%;">
+										<div class="md-center md-temp-color md-alert-type-yellow"></div>
+										<div class="md-center md-cicle">接警：
+										</div>
+										<div>
+											<div style="">
+												<p style="flex: 1;color: white;">接警：2018-07-08 09:22:08</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">车间1</p>
+												<p style="flex:1;color: white;">产线1</p>
+												<p style="color: white;">工位1</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">设备</p>
+												<p style="color: white;">机器损坏</p>
+											</div>
+										</div>
+										<div class="md-center md-temp-color">
+											<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div v-show="isOver" style="display: flex;" id="alertStatusThree">
+						<!--<div class="md-center" style="margin-top: 20px;margin-left:20px;margin-right:20px;text-align: center;">
+						<div>
+							<img style="height: 60px;width: 60px;border-radius: 200px;" src="../../../img/face.jpg" />
+							<p>向德山</p>
+						</div>
+					</div>
+					<div class="md-input-border" :class="{'arrow_border':isActiveThree}" @longTap="onLongTapPopover('alertStatusThree')">
+						<div class="md-center md-temp-color md-alert-type"></div>
+						<div class="md-center md-cicle">完成：</div>
+						<div>
+							<div style="">
+								<p style="flex: 1;color: white;">处理结束：2018-07-08 09:22:08</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">车间1</p>
+								<p style="flex:1;color: white;">产线1</p>
+								<p style="color: white;">工位1</p>
+							</div>
+							<div style="display: flex;">
+								<p style="flex: 1;color: white;">设备</p>
+								<p style="color: white;">机器损坏</p>
+							</div>
+						</div>
+						<div class="md-center md-temp-color">
+							<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+					</div>-->
+						<div class="" style="margin-top: 20px;margin-left:20px;margin-right:20px;text-align: center;">
+							<div class="cd-timeline-block" @tap="onTapSelfLogo">
+								<div class="cd-timeline-img">
+									<img style="height: 40px;width: 40px;border-radius: 200px;" src="../../../img/face.jpg" />
+								</div>
+							</div>
+						</div>
+						<ul class="mui-table-view md-ul3" :class="{'arrow_border':isActiveThree}">
+							<li class="mui-table-view-cell callIndex" style="background-color: transparent;border-radius: 10px;">
+								<div class="mui-slider-right mui-disabled">
+									<a class="mui-btn mui-btn-grey" v-on:tap.stop="onTapUpQuick('2')">快反</a>
+									<a class="mui-btn mui-btn-yellow" v-on:tap.stop = "onTapMorningMeeting('2')">晨会</a>
+								</div>
+								<div class="mui-slider-handle md-background" style="    background-color: transparent;">
+									<div class="md-ul-new-li" style="width: 100%;">
+										<div class="md-center md-temp-color md-alert-type"></div>
+										<div class="md-center md-cicle">完成：
+										</div>
+										<div>
+											<div style="">
+												<p style="flex: 1;color: white;">处理结束：2018-07-08 09:22:08</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">车间1</p>
+												<p style="flex:1;color: white;">产线1</p>
+												<p style="color: white;">工位1</p>
+											</div>
+											<div style="display: flex;">
+												<p style="flex: 1;color: white;">设备</p>
+												<p style="color: white;">机器损坏</p>
+											</div>
+										</div>
+										<div class="md-center md-temp-color">
+											<span class="mui-icon mui-icon-arrowleft md-left-arrow"></span><span class="mui-icon mui-icon-arrowleft md-left-arrow2"></span></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<div class="mui-button-row md-btn-out">
+					<div class="md-bottm-btn-backg">
+						<button type="button" class="mui-btn mui-btn-primary md-btn-inner md-center box-shadow-out md-btn-common md-btn-item-one" :class="{'arrow_border':isActiveBtn}" v-show="isFirst" @tap="onTapBtnOne">
+							<div class="md-center md-bottom-alert-type"><span v-text="receiveVal"></span></div>
+						</button>
+						<button type="button" class="mui-btn mui-btn-primary md-btn-inner md-center box-shadow-out md-btn-common md-btn-item-two" v-show="isSecond" @tap="onTapBtnTwo">
+							<div class="md-center md-bottom-cancel-alert-type"><span v-text="upQuestion"></span></div>
+						</button>
+						<button type="button" class="mui-btn mui-btn-primary md-btn-inner md-center box-shadow-out md-btn-common md-btn-item-three" v-show="isThird" @tap="onTapBtnThree"><div class="md-center md-bottom-cancel-alert-type"><span v-text="cancelVal"></span></div></button>
+					</div>
+				</div>
+			</div>
+			<div id="showDealPopover" class="mui-popover">
+				<ul class="mui-table-view mui-grid-view mui-grid-9">
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+						<a href="#">
+							<span class="mui-icon mui-icon-home"></span>
+							<div class="mui-media-body">快反</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+						<a href="#">
+							<span class="mui-icon mui-icon-email"></span>
+							<div class="mui-media-body">晨会</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mui-popover background" id="ensure">
+				<div class="md-center" style="height: 100%;">
+					<form class="mui-input-group md-center-form" style="background-color: transparent;">
+						<h3 class="md-andon">ANDON</h3>
+						<div class="mui-input-row md-input-group">
+							<label class="md-label-input-split">账号</label>
+							<input type="text" class="label-input-arrow md-input-width mui-input-clear" value="1111" placeholder="请输入用户名">
+						</div>
+						<div class="mui-input-row md-input-group">
+							<label class="md-label-input-split">密码</label>
+							<input type="password" class="mui-input-password" placeholder="请输入密码">
+						</div>
+						<div class="mui-button-row md-btn-out">
+							<button type="button" class="mui-btn mui-btn-primary md-btn-inner2" @tap="onTapGoAlert">确定</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../../config.js"></script>
+		<script type="text/javascript" src="../../../js/function.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: true, //默认为false，不监听
+					release: true //默认为false，不监听
+				}
+			})
+			new Vue({
+				el: '#station',
+				data: {
+					title: "接警",
+					isFirst: false,
+					isSecond: false,
+					isThird: false,
+					isCall: false,
+					isReceive: false,
+					isOver: false,
+					receiveVal: '',
+					upQuestion: '',
+					cancelVal: '',
+					isActiveOne: false,
+					isActiveTwo: false,
+					isActiveThree: false,
+					isActiveBtn: false,
+					stations: [{
+							id: 1,
+							stationName: '工位1'
+						},
+						{
+							id: 2,
+							stationName: '工位2'
+						},
+						{
+							id: 3,
+							stationName: '工位3'
+						},
+						{
+							id: 4,
+							stationName: '工位4'
+						},
+						{
+							id: 5,
+							stationName: '工位5'
+						}
+					]
+				},
+				mounted() {
+					var _this = this;
+					document.addEventListener("pause", function() {
+						console.log("应用从前台切换到后台");
+						mui.toast('程序在后台运行');
+					}, false);
+					document.addEventListener("resume", function() {
+						console.log("应用从后台切换到前台");
+						mui.toast('程序在前台运行');
+					}, false);
+					var _title = JSON.parse(getLsItem("tabData")).title;
+					_this.title = _title.substring(0, _title.length - 2)
+					switch(_title) {
+						case '待接警清单':
+							console.log(4234234)
+							_this.isCall = true;
+							_this.isFirst = true
+							_this.isThird = true;
+							_this.isActiveOne = true
+							_this.isActiveBtn = true;
+							_this.receiveVal = '接警'
+							_this.cancelVal = '误报警'
+							break;
+						case '待处理清单':
+							console.log(4234234)
+							_this.isFirst = true
+							_this.isSecond = true
+							_this.isThird = true
+							_this.isCall = true;
+							_this.isReceive = true
+							_this.isActiveBtn = true;
+							_this.isActiveTwo = true;
+							_this.receiveVal = '处理'
+							_this.upQuestion = '报警转移'
+							_this.cancelVal = '撤销'
+							break;
+						case '待确认清单':
+							_this.isFirst = true
+							_this.isThird = true
+							_this.isCall = true;
+							_this.isReceive = true
+							_this.isOver = true
+							_this.isActiveBtn = true;
+							_this.isActiveThree = true;
+							_this.receiveVal = '确认'
+							_this.cancelVal = '撤销'
+							break;
+						case '已完成清单':
+							console.log(4234234)
+							_this.isThird = true;
+							_this.isCall = true;
+							_this.isReceive = true
+							_this.isOver = true
+							//_this.receiveVal = '接警'
+							_this.cancelVal = '撤销'
+							break;
+						default:
+							break;
+					}
+				},
+				methods: {
+					//长摁，提示
+					onLongTapPopover(status) {
+						mui('#showDealPopover').popover('toggle', document.getElementById(status))
+					},
+					//点击头像。查看这个人的个人信息，或者是这个人处理的历史记录
+					onTapSelfLogo() {
+						mui.toast("您点击了头像")
+					},
+					//第一个按钮
+					onTapBtnOne() {
+						var _this = this;
+						//根据按钮的文字处理不同的信息 
+						if(_this.receiveVal == '接警') {
+							mui('#ensure').popover('toggle')
+						} else if(_this.receiveVal == '处理') {
+							mui.openWindow({
+								url:'handlingDetails.html',
+								id:'handlingDetails'
+							})
+						} else if(_this.receiveVal == '确认') {
+							mui.toast("确认。。。")
+						}
+					},
+					//第二个按钮
+					onTapBtnTwo() {
+						var _this = this;
+						if(_this.upQuestion == '报警转移') {
+							mui.toast("您点击了报警转移")
+						}
+					},
+					//第三个按钮
+					onTapBtnThree() {
+						var _this = this;
+						if(_this.cancelVal == '误报警') {
+							mui('#ensure').popover('toggle')
+						} else if(_this.cancelVal == '撤销') {
+							mui('#ensure').popover('toggle')
+						}
+					},
+					//人员popover
+					onTapGoAlert() {
+						mui('#ensure').popover('toggle')
+					},
+					//快反按钮
+					onTapUpQuick(index){
+						setTimeout(function() {
+							//mui.swipeoutClose(document.getElementById('slider' + host.id));
+							mui.swipeoutClose(document.querySelectorAll(".callIndex")[index]);
+						}, 0);
+						mui.toast("快反")
+					},
+					//晨会
+					onTapMorningMeeting(index){
+						setTimeout(function() {
+							//mui.swipeoutClose(document.getElementById('slider' + host.id));
+							mui.swipeoutClose(document.querySelectorAll(".callIndex")[index]);
+						}, 0);
+						mui.toast("MorningMeeting")
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

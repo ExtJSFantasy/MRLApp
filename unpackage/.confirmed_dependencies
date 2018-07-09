@@ -1,0 +1,29 @@
+{
+	"index.html": {
+		"refer": [
+			"apps/htmls/main.html"
+		]
+	},
+	"apps/htmls/main.html": {
+		"refer": [
+			"apps/htmls/callAlerts/selectStation.html",
+			"apps/htmls/dealAlerts/dealDetails.html",
+			"index.html"
+		]
+	},
+	"apps/htmls/callAlerts/selectStation.html": {
+		"refer": [
+			"apps/htmls/callAlerts/selectAlertType.html"
+		]
+	},
+	"apps/htmls/callAlerts/selectAlertType.html": {
+		"refer": [
+			"apps/htmls/callAlerts/selectAlertDetails.html"
+		]
+	},
+	"apps/htmls/dealAlerts/dealDetails.html": {
+		"refer": [
+			"apps/htmls/dealAlerts/handlingDetails.html"
+		]
+	}
+}

@@ -1,0 +1,1088 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/global.css" />
+		<style type="text/css">
+			html,
+			body {
+				margin: 0;
+				height: 100%;
+			}
+			
+			.mui-popup-inner {
+				position: relative;
+				padding: 15px;
+				border-radius: 13px 13px 0 0;
+				/* background: rgba(255,255,255,.95); */
+				background-color: rgba(21, 82, 136, 1);
+				color: white;
+			}
+			
+			.mui-popup-button:first-child {
+				border-radius: 0 0 0 13px;
+				background-color: rgba(21, 82, 136, 1);
+				color: white;
+			}
+			
+			.mui-popup-button:last-child {
+				border-radius: 0 0 13px;
+				background-color: rgba(21, 82, 136, 1);
+				color: white;
+			}
+			
+			.mui-content {
+				height: 100%;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: white;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				right: 0px;
+				content: '\e583';
+				font-size: 40px;
+			}
+			
+			.mui-navigate-right.mui-active {
+				background-color: rgba(102, 254, 203, 1) !important;
+			}
+			
+			.mui-popover {
+				height: 150px;
+				/*background-color: rgba(21, 82, 136, 1);*/
+			}
+			
+			.mui-popover .mui-popover-arrow:after {
+				/*background: rgba(21, 82, 136, 1);*/
+			}
+			
+			#receiveAlert {
+				position: absolute;
+				left: 5% !important;
+				top: 15%;
+				width: 90%;
+				height: 70%;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+			
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			
+			.oa-contact-content {
+				width: 100%;
+			}
+			
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			
+			.oa-contact-name,
+			oa-contact-position {
+				float: left;
+			}
+			
+			.circle {
+				position: fixed;
+				text-align: center;
+				margin-left: calc((20% - 65px)/2);
+				bottom: 5px;
+				width: 65px;
+				height: 65px;
+				border-radius: 50px;
+				background: rgba(20, 77, 130, 1);
+				z-index: 99;
+			}
+			
+			.tab-center {
+				display: table-cell;
+				overflow: hidden;
+				width: 1%;
+				height: 50px;
+				text-align: center;
+				vertical-align: middle;
+			}
+			
+			.md-position {
+				width: 60px !important;
+				top: auto !important;
+				font-size: 60px !important;
+				color: white;
+			}
+			
+			.md-title {
+				color: white;
+			}
+			
+			.md-background-bottom {
+				background-color: rgba(20, 77, 130, 1);
+			}
+			
+			.md-center {
+				display: flex;
+				justify-content: center;
+				align-items: Center;
+			}
+			
+			.md-center-two {
+				display: flex;
+				height: 100%;
+				justify-content: center;
+				align-items: Center;
+			}
+			
+			.md-first-tabbar {
+				height: 100%;
+			}
+			
+			.md-temp-color {
+				color: white;
+			}
+			
+			.md-alert-type {
+				width: 60px;
+				height: 60px;
+				border-radius: 200px;
+				background-color: #00ff6f;
+			}
+			
+			.md-display {
+				display: flex;
+			}
+			
+			.md-flex-1 {
+				flex: 1;
+			}
+			
+			.md-flex-8 {
+				flex: 8;
+			}
+			
+			.md-background {
+				background-color: transparent !important;
+			}
+			
+			.md-right {
+				margin-right: 35px;
+			}
+			
+			.md-search {
+				text-align: left;
+				color: white;
+				border: solid 1px white !important;
+				border-radius: 50px !important;
+			}
+			
+			.md-list-item {
+				width: 80%;
+				margin: auto;
+				border: solid 1px white;
+				border-radius: 20px;
+				margin-bottom: 15px;
+			}
+			
+			.md-list-delete {
+				position: absolute;
+				width: 20%;
+				text-align: right;
+				right: 10px;
+				top: -10px;
+			}
+			
+			.md-item-margin {
+				margin-left: 5px;
+			}
+			
+			.mui-search .mui-placeholder {
+				text-align: left;
+				color: white;
+			}
+			
+			.mui-table-view:before {
+				background-color: transparent;
+			}
+			
+			.mui-table-view:after {
+				background-color: transparent;
+			}
+			
+			.mui-table-view-cell:after {
+				background-color: transparent;
+			}
+			
+			.md-center-form {
+				width: 60%;
+				height: 50%;
+			}
+			
+			.md-andon {
+				text-align: center;
+				font-size: 48px;
+				font-style: oblique;
+				color: white;
+				margin-bottom: 20px;
+			}
+			
+			.md-input-group {
+				border: solid 1px white;
+				border-radius: 50px;
+				margin-bottom: 20px;
+				color: white;
+			}
+			
+			.md-input-group:last-child {}
+			
+			.md-label-input-split {
+				width: 20% !important;
+				text-align: center;
+				border-right-style: solid;
+				border-right-width: 1px;
+				border-right-color: white;
+			}
+			
+			.md-input-width {
+				width: 75% !important;
+			}
+			
+			.mui-input-group {
+				position: relative;
+				padding: 0;
+				border: 0;
+				background-color: transparent;
+			}
+			
+			.mui-input-group:before {
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+			}
+			
+			.mui-input-group:after {
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+			}
+			
+			.md-btn-inner {
+				width: 60%;
+				height: 45px;
+				margin: auto;
+				margin-top: 60px;
+				font-size: 24px;
+				color: black;
+				border: 1px solid rgba(102, 254, 203, 1);
+				border-radius: 50px;
+				background-color: rgba(102, 254, 203, 1);
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="main">
+			<header class="mui-bar mui-bar-nav md-background">
+				<h1 class="mui-title md-title" v-text="title"></h1>
+				<a class="mui-icon mui-icon-gear mui-pull-right md-title" href="#setting"></a>
+			</header>
+			<nav class="mui-bar mui-bar-tab md-background-bottom">
+				<a class="mui-tab-item mui-active" href="#tabbar" @tap="onTapChangeTabbar('待接警')">
+					<span class="mui-icon mui-icon-home"><span class="mui-badge" v-text="waitingLists.length"></span></span>
+					<span class="mui-tab-label">待接警</span>
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-chat" @tap="onTapChangeTabbar('待处理')">
+					<span class="mui-icon mui-icon-email"><span class="mui-badge" v-text="processLists.length"></span></span>
+					<span class="mui-tab-label">待处理</span>
+				</a>
+				<a class="mui-tab-item" href="" @tap="onTapNewAlert">
+					<div id="xxx.html" class="tab-center">
+						<div class="circle">
+							<span class="mui-icon mui-icon-plusempty md-position"></span>
+						</div>
+					</div>
+
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-contact" @tap="onTapChangeTabbar('待确认')">
+					<span class="mui-icon mui-icon-contact"><span class="mui-badge" v-text="confirmLists.length"></span></span>
+					<span class="mui-tab-label">待确认</span>
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-map" @tap="onTapChangeTabbar('已完成')">
+					<span class="mui-icon mui-icon-gear"><span class="mui-badge" v-text="overLists.length"></span></span>
+					<span class="mui-tab-label">已完成</span>
+				</a>
+			</nav>
+			<div class="mui-content background">
+				<div id="tabbar" class="mui-control-content mui-active md-first-tabbar">
+					<div class="md-center" style="height: 10%;">
+						<div class="mui-input-row mui-search " style="width: 80%;margin: auto;">
+							<input type="search" v-model="wSearch" class="md-search" placeholder="搜索" v-on:input="onWaitingSearch()">
+						</div>
+					</div>
+					<div class="mui-scroll-wrapper" style="margin-top: 10%;">
+						<div class="mui-scroll">
+							<ul class="mui-table-view md-background">
+								<li class="mui-table-view-cell md-list-item" v-for="(waitingList,index) in waitingLists" v-bind:id="['openOption'+waitingList.id]" @tap="onTapItem('待接警',waitingList,index)">
+									<div class="mui-slider-right mui-disabled">
+										<a class="mui-btn mui-btn-grey" v-on:tap.stop="onTapUpQuick('待接警',waitingList,index)">快反</a>
+										<a class="mui-btn mui-btn-yellow">晨会</a>
+										<!--<a class="mui-btn mui-btn-grey mui-icon mui-icon-person"></a>
+										<a class="mui-btn mui-btn-yellow mui-icon mui-icon-phone"></a>
+										<a class="mui-btn mui-btn-red mui-icon mui-icon-email"></a>-->
+									</div>
+									<div class="mui-slider-handle md-background">
+										<a class="mui-navigate-right">
+											<div>
+												<h5 class="md-temp-color" style="width: 70%;">待接警&nbsp;&nbsp;{{waitingList.createDate}} </h5>
+												<span class="mui-icon mui-icon-trash mui-pull-right md-temp-color md-list-delete" v-on:tap.stop="onTapDeleteItem('待接警',waitingList,index)"></span>
+											</div>
+											<div class="md-display md-right">
+												<div class="md-center md-flex-1">
+													<div class="md-center md-temp-color md-alert-type"><span style="" v-text="waitingList.alertType"></span></div>
+												</div>
+												<div class="md-temp-color md-flex-8 md-item-margin">
+													<div>
+														<span v-text="waitingList.stationName"></span>
+														<span class="mui-pull-right" v-text="waitingList.receive"></span>
+													</div>
+													<div>
+														<span>接警</span>
+														<span class="mui-pull-right" v-text="waitingList.receiveDate"></span>
+													</div>
+													<div>
+														<span>完成</span>
+														<span class="mui-pull-right" v-text="waitingList.overDate">15:01:30</span>
+													</div>
+													<div>
+														<span>接警人</span>
+														<span class="mui-pull-right" v-text="waitingList.receiveUser">向德山</span>
+													</div>
+												</div>
+											</div>
+										</a>
+									</div>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="tabbar-with-chat" class="mui-control-content md-first-tabbar">
+					<div class="md-center" style="height: 10%;">
+						<div class="mui-input-row mui-search " style="width: 80%;margin: auto;">
+							<input class="md-search" type="search" class="" placeholder="搜索">
+						</div>
+					</div>
+					<div class="mui-scroll-wrapper" style="margin-top: 10%;">
+						<div class="mui-scroll">
+							<ul class="mui-table-view md-background">
+								<li class="mui-table-view-cell md-list-item" v-for="(processList,index) in processLists" @tap="onTapItem('待处理',processList,index)">
+									<a class="mui-navigate-right">
+										<h5 class="md-temp-color">待处理&nbsp;&nbsp;{{processList.createDate}}</h5>
+										<div class="md-display md-right">
+											<div class="md-center md-flex-1">
+												<div class="md-center md-temp-color md-alert-type"><span style="" v-text="processList.alertType"></span></div>
+											</div>
+											<div class="md-temp-color md-flex-8 md-item-margin">
+												<div>
+													<span v-text="processList.stationName"></span>
+													<span class="mui-pull-right" v-text="processList.receive"></span>
+												</div>
+												<div>
+													<span>接警</span>
+													<span class="mui-pull-right" v-text="processList.receiveDate"></span>
+												</div>
+												<div>
+													<span>完成</span>
+													<span class="mui-pull-right" v-text="processList.overDate">15:01:30</span>
+												</div>
+												<div>
+													<span>接警人</span>
+													<span class="mui-pull-right" v-text="processList.receiveUser">向德山</span>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div id="tabbar-with-contact" class="mui-control-content md-first-tabbar">
+					<div class="md-center" style="height: 10%;">
+						<div class="mui-input-row mui-search " style="width: 80%;margin: auto;">
+							<input class="md-search" type="search" class="" placeholder="搜索">
+						</div>
+					</div>
+					<div class="mui-scroll-wrapper" style="margin-top: 10%;">
+						<div class="mui-scroll">
+							<ul class="mui-table-view md-background">
+								<li class="mui-table-view-cell md-list-item" v-for="(confirmList,index) in confirmLists" @tap="onTapItem('待确认',confirmList,index)">
+									<a class="mui-navigate-right">
+										<h5 class="md-temp-color">待确认&nbsp;&nbsp;{{confirmList.createDate}}</h5>
+										<div class="md-display md-right">
+											<div class="md-center md-flex-1">
+												<div class="md-center md-temp-color md-alert-type"><span style="" v-text="confirmList.alertType"></span></div>
+											</div>
+											<div class="md-temp-color md-flex-8 md-item-margin">
+												<div>
+													<span v-text="confirmList.stationName"></span>
+													<span class="mui-pull-right" v-text="confirmList.receive"></span>
+												</div>
+												<div>
+													<span>接警</span>
+													<span class="mui-pull-right" v-text="confirmList.receiveDate"></span>
+												</div>
+												<div>
+													<span>完成</span>
+													<span class="mui-pull-right" v-text="confirmList.overDate">15:01:30</span>
+												</div>
+												<div>
+													<span>接警人</span>
+													<span class="mui-pull-right" v-text="confirmList.receiveUser">向德山</span>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="tabbar-with-map" class="mui-control-content md-first-tabbar">
+					<div class="md-center" style="height: 10%;">
+						<div class="mui-input-row mui-search " style="width: 80%;margin: auto;">
+							<input class="md-search" type="search" class="" placeholder="搜索">
+						</div>
+					</div>
+					<div class="mui-scroll-wrapper" style="margin-top: 10%;">
+						<div class="mui-scroll">
+							<ul class="mui-table-view md-background">
+								<li class="mui-table-view-cell md-list-item" v-for="(overList,index) in overLists" @tap="onTapItem('已完成',overList,index)">
+									<a class="mui-navigate-right">
+										<h5 class="md-temp-color">已完成&nbsp;&nbsp;{{overList.createDate}}</h5>
+										<div class="md-display md-right">
+											<div class="md-center md-flex-1">
+												<div class="md-center md-temp-color md-alert-type"><span style="" v-text="overList.alertType"></span></div>
+											</div>
+											<div class="md-temp-color md-flex-8 md-item-margin">
+												<div>
+													<span v-text="overList.stationName"></span>
+													<span class="mui-pull-right" v-text="overList.receive"></span>
+												</div>
+												<div>
+													<span>接警</span>
+													<span class="mui-pull-right" v-text="overList.receiveDate"></span>
+												</div>
+												<div>
+													<span>完成</span>
+													<span class="mui-pull-right" v-text="overList.overDate">15:01:30</span>
+												</div>
+												<div>
+													<span>接警人</span>
+													<span class="mui-pull-right" v-text="overList.receiveUser">向德山</span>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="setting" class="mui-popover">
+				<ul class="mui-table-view md-background">
+					<li class="mui-table-view-cell" @tap="onTapGoIndex">
+						<a href="#"><span class="icon-equalizer"></span>&nbsp;&nbsp;<span>配置</span></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="#"><span class="icon-bin2"></span>&nbsp;&nbsp;<span>清除缓存</span></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="#"><span class="icon-table2"></span>&nbsp;&nbsp;<span>查看报表</span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="mui-popover background" id="receiveAlert">
+				<div class="md-center-two">
+					<form class="mui-input-group md-center-form" style="background-color: transparent;">
+						<h3 class="md-andon">ANDON</h3>
+						<div class="mui-input-row md-input-group">
+							<label class="md-label-input-split">账号</label>
+							<input type="text" class="label-input-arrow md-input-width mui-input-clear" value="1111" placeholder="请输入用户名">
+						</div>
+						<div class="mui-input-row md-input-group">
+							<label class="md-label-input-split">密码</label>
+							<input type="password" class="mui-input-password" placeholder="请输入密码">
+						</div>
+						<div class="mui-button-row md-btn-out">
+							<button type="button" class="mui-btn mui-btn-primary md-btn-inner" @tap="onTapCancelAlert">确定</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../config.js"></script>
+		<script type="text/javascript" src="../../js/function.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el: '#main',
+				data: {
+					title: '待接警清单',
+					wSearch: '',
+					selectIndex: 0,
+					waitingLists: [{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量1',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 2,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: 'zhangsan'
+						},
+						{
+							id: 3,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质保',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 4,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 5,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 6,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 7,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 8,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 9,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 10,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						}
+					],
+					waitingLists2: [{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量1',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 2,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: 'zhangsan'
+						},
+						{
+							id: 3,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质保',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 4,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 5,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 6,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 7,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 8,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 9,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 10,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '设备',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						}
+					],
+					processLists: [{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						}
+					],
+					confirmLists: [{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						}
+					],
+					overLists: [{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '质量',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						},
+						{
+							id: 1,
+							status: 1,
+							createDate: '2018-07-05 12:11:45',
+							alertType: '工艺',
+							stationName: 'FVT 1-3',
+							receive: '9小时20分',
+							receiveDate: '15:01:30',
+							overDate: '15:31:30',
+							receiveUser: '向德山'
+						}
+					]
+				},
+				mounted() {
+					mui.plusReady(function() {})
+					mui.init({
+						swipeBack: false,
+						beforeback: function() {　　　
+							var _isLogin = getLsItem("isLogin");
+							if(_isLogin == "true") {
+								mui.confirm("确定退出？", "<span style='font-style: oblique;'>ANDON</span>", ["取消", "确定"], function(e) {
+									if(e.index == 1) {
+										plus.runtime.quit();
+									}
+								}, 'div')
+							}
+							return false;
+						}
+					});
+					document.addEventListener("pause", function() {
+						console.log("应用从前台切换到后台");
+						mui.toast('程序在后台运行');
+					}, false);
+					//加载数据
+					document.addEventListener("resume", function() {
+						console.log("应用从后台切换到前台");
+						mui.toast('程序在前台运行');
+					}, false);
+					mui('.mui-scroll-wrapper').scroll({
+						indicators: true //是否显示滚动条
+					});
+				},
+				methods: {
+					//设置
+					onTapSetting() {
+						mui('.mui-popover').popover('toggle', document.getElementById("openPopover"));
+					},
+					//tab切换
+					onTapChangeTabbar(tabName) {
+						this.title = tabName + "清单";
+						console.log(tabName);
+						switch(tabName) {
+							case '待接警':
+								console.log(111);
+								break;
+							case '待处理':
+								console.log(222);
+								break;
+							case '待确认':
+								console.log(333);
+								break;
+							case '已完成':
+								console.log(444);
+								break;
+							default:
+								break;
+						}
+					},
+					//新增报警
+					onTapNewAlert(tabName) {
+						mui.openWindow({
+							url: "callAlerts/selectStation.html",
+							id: "selectStation"
+						})
+					},
+					//点击待接警每一项
+					onTapItem(type, wData, index) {
+						var _obj = {};
+						_obj.title = this.title;
+						_obj.itemData = wData;
+						setLsItem("tabData", JSON.stringify(_obj))
+						mui.openWindow({
+							url: 'dealAlerts/dealDetails.html',
+							id: 'dealDetatls'
+						})
+					},
+					//删除
+					onTapDeleteItem(type, data, index) {
+						var _this = this;
+						_this.selectIndex = index;
+						if(type == "待接警") {
+							mui('#receiveAlert').popover('toggle')
+							//需确认登陆人信息
+							_this.waitingLists.forEach(function(item, index) {
+								if(item.id == data.id) {
+									document.getElementById("openOption" + item.id).style.backgroundColor = 'rgba(102, 254, 203, 1)';
+								} else {
+									document.getElementById("openOption" + item.id).style.backgroundColor = 'transparent'
+								}
+							})
+
+							/*mui.confirm("确定删除？", "<span style='font-style: oblique;'>ANDON</span>", ["取消", "确定"], function(e) {
+								if(e.index == 1) {
+									_this.waitingLists.forEach(function(itemInner, index) {
+										document.getElementById("openOption" + itemInner.id).style.backgroundColor = 'transparent'
+									})
+									_this.waitingLists.splice(index, 1);
+								} else {
+									document.getElementById("openOption" + data.id).style.backgroundColor = 'transparent'
+								}
+							}, 'div')*/
+						}
+
+					},
+					//待接警查询
+					onWaitingSearch() {
+						var _this = this;
+						console.log(222222);
+						if(_this.title == "待接警清单") {
+							var _this = this;
+							var _waitingLists = _this.waitingLists2; //_this.users;
+							var _search = _this.wSearch.trim();
+							if(_search != '') {
+								var _arr = _waitingLists.filter(function(item) {
+									return item.alertType.indexOf(_search) > -1 || item.stationName.indexOf(_search) > -1 || item.receiveUser.indexOf(_search) > -1;
+								});
+								//return _arr
+								_this.waitingLists = _arr;
+							} else {
+								_this.waitingLists = _this.waitingLists2;
+								//根据所选的字母刷新数据
+								/*mAjax(_url2 + 'projectInterface/userProfileLike', {
+									tableName: 'UserProfile',
+									userDescription: '',
+									userName: _this.isSelectLetter
+									//where: " userDescription='" + "王" + "'"
+								}, function(data) {
+									//console.log(data);
+									if(data.code == 200 && data.msg == 'OK') {
+										//_this.areas = data.results
+										_this.users = data.results;
+										if(_this.users.length < 1) {
+											_this.isData = true;
+										} else {
+											_this.isData = false;
+										}
+									}
+
+								})*/
+							}
+						} else if(_this.title == "待处理清单") {
+
+						} else if(_this.title == "待确认清单") {
+
+						} else if(_this.title == "已完成清单") {
+
+						}
+					},
+					onTapUpQuick(type, data, index) {
+
+					},
+					//跳转index界面
+					onTapGoIndex() {
+						removeLsItem("isLogin");
+						var curr = plus.webview.currentWebview();
+						var wvs = plus.webview.all();
+						for(var i = 0, len = wvs.length; i < len; i++) {
+							//关闭除setting页面外的其他页面
+							if(wvs[i].getURL() == curr.getURL())
+								continue;
+							plus.webview.close(wvs[i]);
+						}
+						//打开index界面
+						plus.webview.open('../../index.html');
+						curr.close();
+					},
+					onTapCancelAlert() {
+						var _this = this;
+						mui('#receiveAlert').popover('toggle')
+						_this.waitingLists.forEach(function(itemInner, index) {
+							document.getElementById("openOption" + itemInner.id).style.backgroundColor = 'transparent'
+						})
+						_this.waitingLists.splice(_this.selectIndex, 1);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

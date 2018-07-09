@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/global.css" />
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+			}
+			
+			.mui-table-view:before {
+				position: absolute;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+				top: -1px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+				top: -1px;
+			}
+			
+			.mui-table-view-cell:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: transparent;
+			}
+			.mui-table-view-cell.mui-active {
+				background-color: rgba(102, 254, 203, 1);
+			}
+			.mui-icon-back:before,
+			.mui-icon-left-nav:before {
+				content: '\e471';
+				font-size: 22px;
+			}
+			
+			.mui-content {
+				height: 100%;
+			}
+			
+			.md-header {
+				color: white;
+			}
+			
+			.md-header-title-size {
+				font-size: 24px;
+			}
+			
+			.md-header-back-size {
+				font-size: 18px !important;
+			}
+			
+			.md-ul-li {
+				width: 80%;
+				margin: auto;
+				margin-top: 20px;
+				text-align: center;
+				background-color: rgba(0, 30, 68, 1);
+				border-radius: 50px;
+				border: solid 1px rgba(0, 30, 68, 1);
+			}
+			.md-ul-li-active {
+				width: 80%;
+				margin: auto;
+				text-align: center;
+				margin-top: 20px;
+				background-color: rgba(102, 254, 203, 1);
+				border-radius: 50px;
+				border: solid 1px rgba(102, 254, 203, 1);
+			}
+			.md-background {
+				background-color: transparent;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="alertType">
+			<header class="mui-bar mui-bar-nav md-background">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left md-header md-header-back-size">返回</a>
+				<h1 class="mui-title md-header md-header-title-size">选择异常类型</h1>
+			</header>
+			<div class="mui-content background">
+				<ul class="mui-table-view md-background" style="color: white;">
+					<li class="mui-table-view-cell md-ul-li" v-for="(abnormal,index) in abnormals" @tap="onTapSelectItem(abnormal,index)">
+						{{abnormal.abnormalName}}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+		<script type="text/javascript">
+			mui.init()
+			new Vue({
+				el:'#alertType',
+				data:{
+					abnormals:[
+						{id:1,abnormalName:'设备'},
+						{id:2,abnormalName:'质量'},
+						{id:3,abnormalName:'物料'},
+						{id:4,abnormalName:'工艺'},
+						{id:5,abnormalName:'安全'}
+					]
+				},
+				mounted(){},
+				methods:{
+					onTapSelectItem(abnormal,index){
+						mui.openWindow({
+							url:'selectAlertDetails.html',
+							id:'selectAlertDetails'
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

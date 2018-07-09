@@ -1,0 +1,16 @@
+.background {
+	background: -webkit-linear-gradient(left top, rgba(21, 82, 136, 1), rgba(4, 16, 28, 1));
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(bottom right, rgba(21, 82, 136, 1), rgba(4, 16, 28, 1));
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(bottom right, rgba(21, 82, 136, 1), rgba(4, 16, 28, 1));
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to bottom right, rgba(21, 82, 136, 1), rgba(4, 16, 28, 1));
+	/* 标准的语法 */
+}
+
+.mui-bar-nav {
+	top: 0;
+	-webkit-box-shadow: 0 1px 6px #ccc;
+	box-shadow: 0 1px 6px transparent;
+}
