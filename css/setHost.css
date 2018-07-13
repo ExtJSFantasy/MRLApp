@@ -1,0 +1,18 @@
+.md-setting-ipensure {
+	position: absolute;
+	width: 7vh;
+	right: 0vh;
+	color: white;
+	text-align: center;
+	margin-top: 1.7vh;
+	line-height: 2vh;
+	background-color: #3a82bb;
+}
+
+.md-title-plus {
+	width: 4vh;
+	height: 4vh;
+	font-size: 4vh !important;
+	color: white !important;
+	margin-right: .3vh !important;
+}

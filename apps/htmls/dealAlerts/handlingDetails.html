@@ -248,7 +248,7 @@
 	</head>
 
 	<body>
-		<div class="mui-content" id="details">
+		<div class="mui-content background" id="details">
 			<header class="mui-bar mui-bar-nav md-background">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left md-header md-header-back-size">返回</a>
 				<h1 class="mui-title md-header md-header-title-size">处理</h1>
@@ -260,7 +260,7 @@
 						<input type="text" class="md-input label-input-arrow" readonly id="checkTime" v-model="checkTime" />
 						<h4 class="md-header">使用备件</h4>
 						<input class="md-input" type="text" />
-						<h4 class="md-header">停机时间</h4>
+						<h4 class="md-header">停机</h4>
 						<input class="md-input" type="text" />
 						<h4 class="md-header">使用备件</h4>
 						<input class="md-input" type="text" />
@@ -274,17 +274,17 @@
 					<button type="button" class="mui-btn mui-btn-primary md-btn-inner" @tap="onTapAlertPopover">提交</button>
 				</div>
 			</div>
-			<div class="mui-popover background" id="ensure">
-				<div class="md-center">
+			<div class="mui-popover background" id="ensure" >
+				<div class="md-center" style="height: 100%;">
 					<form class="mui-input-group md-center-form md-background">
 						<h3 class="md-andon">ANDON</h3>
 						<div class="mui-input-row md-input-group">
 							<label class="md-label-input-split">账号</label>
-							<input type="text" class="label-input-arrow md-input-width mui-input-clear" value="1111" placeholder="请输入用户名">
+							<input type="text" class="label-input-arrow md-input-width mui-input-clear" v-model="userName" placeholder="请输入用户名">
 						</div>
 						<div class="mui-input-row md-input-group">
 							<label class="md-label-input-split">密码</label>
-							<input type="password" class="mui-input-password" placeholder="请输入密码">
+							<input type="password" class="mui-input-password md-input-width" v-model="pwd" placeholder="请输入密码">
 						</div>
 						<div class="mui-button-row md-btn-out">
 							<button type="button" class="mui-btn mui-btn-primary md-btn-inner" @tap="onTapGoAlert">确定</button>
@@ -294,6 +294,7 @@
 			</div>
 		</div>
 		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/static.js" ></script>
 		<script type="text/javascript" src="../../../config.js"></script>
 		<script type="text/javascript" src="../../../js/function.js"></script>
 		<script type="text/javascript" src="../../../js/vue.min.js"></script>
@@ -303,29 +304,11 @@
 			new Vue({
 				el: '#details',
 				data: {
-					details: [{
-							id: 1,
-							detailName: '明细1'
-						},
-						{
-							id: 2,
-							detailName: '明细2'
-						},
-						{
-							id: 3,
-							detailName: '明细3'
-						},
-						{
-							id: 4,
-							detailName: '明细4'
-						},
-						{
-							id: 5,
-							detailName: '明细5'
-						}
-					],
-					actionMeasure: '11111',
-					checkTime: ''
+					details: [],
+					actionMeasure: '',
+					checkTime: '',
+					userName: '',
+					pwd: ''
 				},
 				mounted() {
 					mui.init()
@@ -351,7 +334,35 @@
 						mui('#ensure').popover('toggle')
 					},
 					onTapGoAlert() {
-						mui('#ensure').popover('toggle')
+						var _this = this;
+						var _itemData = JSON.parse(getLsItem("tabData")).itemData
+						mAjax(_url + 'AlertDetail/' + parseInt(_itemData.alertDetailId), {
+							"userNo": _this.userName,
+							"password": _this.pwd,
+							"status": parseInt(2),
+							"dealAction":_this.actionMeasure
+						}, 'put', "处理中。。。", function(success) {
+							if(success.code == 200) {
+								mui('#ensure').popover('toggle')
+								var curr = plus.webview.currentWebview();
+								var wvs = plus.webview.all();
+								for(var i = 0, len = wvs.length; i < len; i++) {
+									//关闭除setting页面外的其他页面
+									if(wvs[i].getURL() == curr.getURL())
+										continue;
+									plus.webview.close(wvs[i]);
+								}
+								//打开index界面
+								plus.webview.open('../main.html');
+								curr.close();
+							} else if(success.code == 204) {
+								mui.toast(success.msg)
+							} else {
+								mui.toast(success.msg)
+							}
+						}, function(error) {
+							mui.toast(JSON.stringify(error))
+						})
 					}
 				}
 			})

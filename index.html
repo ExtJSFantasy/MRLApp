@@ -235,14 +235,26 @@
 				border: solid 1px white;
 				border-radius: 20px;
 			}
-			.md-input-radio{
+			
+			.md-input-radio {
 				font-size: 2rem;
+			}
+			
+			.md-setting-btn {
+				width: 50%;
+				margin: auto;
+				margin-top: 10px;
+				border-radius: 10px;
 			}
 		</style>
 	</head>
 
 	<body>
 		<div class="mui-content md-center background" id="index">
+			<!--<button style="position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;">设置账套</button>-->
 			<form class="mui-input-group md-center-form">
 				<div class="mui-input-row md-input-group">
 					<label class="md-label-input-split">车间</label>
@@ -258,6 +270,7 @@
 				</div>
 				<div class="mui-button-row md-btn-out">
 					<button type="button" class="mui-btn mui-btn-primary md-btn-inner" @tap="onTapGoMain">确定</button>
+					<button type="button" class="mui-btn mui-btn-primary md-setting-btn" @tap="onTapGoSetHost">设置账套</button>
 				</div>
 			</form>
 			<div id="workshop" class="mui-popover background">
@@ -270,8 +283,8 @@
 							<ul class="mui-table-view mui-table-view-radio md-table-view">
 								<li class="mui-table-view-cell md-input-border" v-for="(itemData,index) in workshops" :key="index" @tap="onItemSelectWorkshop('workshop',itemData,index)">
 									<div class="mui-input-row mui-radio md-radio">
-										<label v-text="itemData.name"></label>
-										<input class="md-input-radio" name="radio" type="radio" v-bind:checked="itemData.checked">
+										<label v-text="itemData.factoryName"></label>
+										<input class="md-input-radio" name="radio" type="radio">
 									</div>
 								</li>
 							</ul>
@@ -289,8 +302,8 @@
 							<ul class="mui-table-view mui-table-view-radio md-table-view">
 								<li class="mui-table-view-cell md-input-border" v-for="(itemData,index) in lines" :key="index" @tap="onItemSelectLine('line',itemData,index)">
 									<div class="mui-input-row mui-radio md-radio">
-										<label v-text="itemData.name"></label>
-										<input class="md-input-radio" name="radio" type="radio" v-bind:checked="itemData.checked">
+										<label v-text="itemData.lineName"></label>
+										<input class="md-input-radio" name="radio" type="radio">
 									</div>
 								</li>
 							</ul>
@@ -308,8 +321,8 @@
 							<ul class="mui-table-view mui-table-view-radio md-table-view">
 								<li class="mui-table-view-cell md-input-border" v-for="(itemData,index) in stations" :key="index" @tap="onItemSelectStation('station',itemData,index)">
 									<div class="mui-input-row mui-radio md-radio">
-										<label v-text="itemData.name"></label>
-										<input class="md-input-radio" name="radio" type="radio" v-bind:checked="itemData.checked">
+										<label v-text="itemData.stationName"></label>
+										<input class="md-input-radio" name="radio" type="radio">
 									</div>
 								</li>
 							</ul>
@@ -319,7 +332,7 @@
 			</div>
 		</div>
 	</body>
-
+	<script type="text/javascript" src="js/static.js"></script>
 	<script type="text/javascript" src="js/vue.min.js"></script>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="config.js"></script>
@@ -336,58 +349,31 @@
 				return false;
 			}
 		});
+		window.addEventListener('refreshNew', function(e) { //执行刷新
+			mui.toast("刷新");
+			location.reload(true);
+		});
 		new Vue({
 			el: '#index',
 			data: {
 				workshopName: '',
 				lineName: '',
 				stationName: '',
-				configObj:{},
-				workshops: [{
-					id: 1,
-					wid: 1,
-					name: '车间 1',
-					checked: false
-				}, {
-					id: 2,
-					wid: 2,
-					name: '车间 二',
-					checked: false
-				}],
-				lines: [{
-					id: 1,
-					wid: 1,
-					name: '产线1',
-					checked: false
-				}, {
-					id: 2,
-					wid: 2,
-					name: '产线二',
-					checked: false
-				}],
-				stations: [{
-					id: 1,
-					wid: 1,
-					name: '工位1',
-					checked: false
-				}, {
-					id: 2,
-					wid: 2,
-					name: '工位 二',
-					checked: false
-				}]
+				configObj: {},
+				learIp: localStorage.getItem('learhost'),
+				workshops: [],
+				lines: [],
+				stations: [],
+				tempData: '',
 			},
 			mounted() {
 				mui('.mui-scroll-wrapper').scroll({
 					indicators: true
 				})
+				var _this = this;
 				mui.plusReady(function() {
-					//console.log(JSON.stringify(plus.webview.currentWebview()));
 					var _isLogin = getLsItem("isLogin");
-					var _initData = {
-						tabbarName: '',
-						itemData: ''
-					}
+					var _isConfig = getLsItem("configData");
 					if(_isLogin == null || _isLogin == undefined) {
 
 					} else {
@@ -396,35 +382,127 @@
 							id: 'main'
 						})
 					}
+					if(_isConfig == null || _isConfig == undefined || _isConfig == '{}') {
+
+					} else {
+						_this.configObj = JSON.parse(_isConfig);
+						_this.workshopName = JSON.parse(_isConfig).workshop.factoryName
+						_this.lineName = JSON.parse(_isConfig).line.lineName
+						_this.stationName = JSON.parse(_isConfig).station == undefined ? '' : JSON.parse(_isConfig).station.stationName
+					}
+					_this.initData()
 				})
 			},
 			methods: {
+				initData() {
+					var _this = this;
+					if(this.learIp == null || this.learIp == '') {
+						mui.toast("请设置账套！！！")
+						return
+					}
+					mAjax(_url + 'Factory/showAll', {}, 'post', '数据加载中。。。', function(success) {
+						if(success.code == 200) {
+							_this.workshops = success.data
+						} else {
+							mui.toast(success)
+						}
+					}, function(error) {
+						mui.toast(error)
+					})
+
+				},
 				//进入主界面
 				onTapGoMain() {
-					setLsItem("isLogin", 'true')
+					var _this = this;
+					if(_this.learIp == null || _this.learIp == '') {
+						var btnArray = ['设置账套', '取消'];
+						mui.confirm(' ', '请设置账套', btnArray, function(e) {
+							if(e.index == 0) {
+								mui.openWindow({
+									url: 'apps/htmls/setHost.html',
+									id: 'setHost'
+								});
+							} else {}
+						})
+					} else {
+						setLsItem("configData", JSON.stringify(_this.configObj))
+						setLsItem("isLogin", 'true')
+						mui.openWindow({
+							url: 'apps/htmls/main.html',
+							id: 'main'
+						})
+					}
+
+				},
+				//设置账套
+				onTapGoSetHost() {
 					mui.openWindow({
-						url: 'apps/htmls/main.html',
-						id: 'main'
+						url: 'apps/htmls/setHost.html',
+						id: 'setHost'
 					})
 				},
-				//选择车间
+				//选择
 				onTapSelectPopover(type) {
-					mui('#'+type).popover('toggle')
+					var _this = this;
+					var _tempData = _this.tempData,
+						_tempArr = [];
+					mui('#' + type).popover('toggle')
+					if(type == 'line') {
+						_tempData = _this.tempData == '' ? _this.configObj.workshop : _this.tempData
+						mAjax(_url + 'Line/showAll', {}, 'post', '数据加载中。。。', function(success) {
+							if(success.code == 200) {
+								success.data.forEach(function(item, index) {
+									if(item.factoryId == _tempData.factoryNo) {
+										_tempArr.push(item)
+									}
+								})
+								_this.lines = _tempArr
+							} else {
+								mui.toast(success)
+							}
+						}, function(error) {
+							mui.toast(error)
+						})
+					}
+					if(type == 'station') {
+						_tempData = _this.tempData == '' ? _this.configObj.line : _this.tempData
+						mAjax(_url + 'Station/showAll', {}, 'post', '数据加载中。。。', function(success) {
+							if(success.code == 200) {
+								success.data.forEach(function(item, index) {
+									if(item.lineId == _tempData.lineNo) {
+										_tempArr.push(item)
+									}
+								})
+								_this.stations = _tempArr
+							} else {
+								mui.toast(success)
+							}
+						}, function(error) {
+							mui.toast(error)
+						})
+					}
 				},
 				//选择哪一个车间
-				onItemSelectWorkshop(type,item, index) {
-					this.workshopName = item.name
-					mui('#'+type).popover('toggle');
+				onItemSelectWorkshop(type, item, index) {
+					this.configObj.workshop = item;
+					this.tempData = item;
+					this.workshopName = item.factoryName
+					mui('#' + type).popover('toggle');
+
 				},
 				//选择哪一个产线
-				onItemSelectLine(type,item, index) {
-					this.lineName = item.name
-					mui('#'+type).popover('toggle')
+				onItemSelectLine(type, item, index) {
+					this.configObj.line = item;
+					this.tempData = item;
+					this.lineName = item.lineName
+					mui('#' + type).popover('toggle')
 				},
 				//选择哪一个工位
-				onItemSelectStation(type,item, index) {
+				onItemSelectStation(type, item, index) {
+					this.configObj.station = item;
 					this.stationName = item.name
-					mui('#'+type).popover('toggle')
+					this.stationName = item.stationName
+					mui('#' + type).popover('toggle')
 				}
 			}
 		})

@@ -1,27 +1,37 @@
-//mui.ajax请求数据
-function mAjax(url, params, callback) {
-	mui.ajax(url, {
+/**
+ * 
+ * @param {Object} _url					请求路径
+ * @param {Object} params				参数
+ * @param {Object} type					请求类型 post,get
+ * @param {Object} showText				抓取或提交时的提示
+ * @param {Object} successCallback		成功回调
+ * @param {Object} errCallback			失败回调
+ */
+function mAjax(_url, params, type, showText, successCallback, errCallback) {
+	mui.ajax(_url, {
 		data: params,
-		dataType: 'json',
-		type: 'post',
-		/*beforeSend: function() {
-	       	plus.nativeUI.showWaiting("加载中。。。");
-	       // mask.show();//显示遮罩层
-	    },
-	    complete: function() {
-	        plus.nativeUI.closeWaiting();
-	       // mask.close();//关闭遮罩层
-	    },*/
-		//async:false,//同步操作
+		dataType: 'json', //服务器返回json格式数据
+		type: type, //HTTP请求类型
+		//timeout: 10000, //超时时间设置为10秒；
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		beforeSend: function(xhr) {
+			//xhr.setRequestHeader("Authorization", _token_type + " " + _accessToken);
+			plus.nativeUI.showWaiting(showText);
+		},
+		complete: function() {
+			//_this.isShow2 = false;
+			plus.nativeUI.closeWaiting();
+		},
 		success: function(data) {
-			callback(data)
+			successCallback(data)
 		},
 		error: function(xhr, type, errorThrown) {
-			console.log(xhr);
-			console.log(type);
-			mui.toast("请求异常")
+			plus.nativeUI.closeWaiting();
+			errCallback(xhr, type, errorThrown)
 		}
-	})
+	});
 }
 //包含
 function arrContain(arr, e) {
@@ -758,7 +768,7 @@ function update(code) {
 	});
 }
 //日期选择
-function selectDate(type, objId, value, callback){
+function selectDate(type, objId, value, callback) {
 	var _obj = document.getElementById(objId);
 	_obj.addEventListener('tap', function() {
 		/*
@@ -768,10 +778,10 @@ function selectDate(type, objId, value, callback){
 		 */
 		var picker = new mui.DtPicker({
 			type: type,
-			beginDate: new Date(1950, 01, 01),//设置开始日期
-    		endDate: new Date(2020, 12, 31),//设置结束日期
-    	});
-		if(value != ""){ 
+			beginDate: new Date(1950, 01, 01), //设置开始日期
+			endDate: new Date(2020, 12, 31), //设置结束日期
+		});
+		if(value != "") {
 			picker.setSelectedValue(value)
 		}
 		picker.show(function(rs) {
@@ -779,4 +789,23 @@ function selectDate(type, objId, value, callback){
 			picker.dispose();
 		});
 	}, false);
+}
+/**
+ * 
+ * @param {Object} faultDate 开始时间
+ * @param {Object} completeTime	结束时间
+ */
+function computeTimefunction(faultDate, completeTime) {
+	var stime = Date.parse(new Date(faultDate));
+	var etime = Date.parse(new Date(completeTime));
+	var usedTime = etime - stime; //两个时间戳相差的毫秒数
+	var days = Math.floor(usedTime / (24 * 3600 * 1000));
+	//计算出小时数
+	var leave1 = usedTime % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+	var hours = Math.floor(leave1 / (3600 * 1000));
+	//计算相差分钟数
+	var leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+	var minutes = Math.floor(leave2 / (60 * 1000));
+	var time = days + "天" + hours + "时" + minutes + "分";
+	return time;
 }

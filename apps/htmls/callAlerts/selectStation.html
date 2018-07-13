@@ -48,9 +48,11 @@
 				transform: scaleY(.5);
 				background-color: transparent;
 			}
+			
 			.mui-table-view-cell.mui-active {
 				background-color: rgba(102, 254, 203, 1);
 			}
+			
 			.mui-icon-back:before,
 			.mui-icon-left-nav:before {
 				content: '\e471';
@@ -82,6 +84,7 @@
 				border-radius: 50px;
 				border: solid 1px rgba(0, 30, 68, 1);
 			}
+			
 			.md-ul-li-active {
 				width: 80%;
 				margin: auto;
@@ -109,26 +112,52 @@
 			</div>
 		</div>
 		<script src="../../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+		<script type="text/javascript" src="../../../js/static.js"></script>
+		<script type="text/javascript" src="../../../config.js"></script>
+		<script type="text/javascript" src="../../../js/function.js"></script>
+		<script type="text/javascript" src="../../../js/vue.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function() {　　　　 //获得父页面的webview
+					var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+					mui.fire(list, 'refreshMain');
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
 			new Vue({
-				el:'#station',
-				data:{
-					stations:[
-						{id:1,stationName:'工位1'},
-						{id:2,stationName:'工位2'},
-						{id:3,stationName:'工位3'},
-						{id:4,stationName:'工位4'},
-						{id:5,stationName:'工位5'}
-					]
+				el: '#station',
+				data: {
+					stations: []
 				},
-				mounted(){},
-				methods:{
-					onTapSelectItem(station,index){
+				mounted() {
+					var _this = this;
+					var _tempArr = [],
+						_tempData = {};
+					_tempData = JSON.parse(getLsItem("configData")).line;
+					mui.plusReady(function() {
+						mAjax(_url + 'Station/showAll', {}, 'post', '数据加载中。。。', function(success) {
+							if(success.code == 200) {
+								success.data.forEach(function(item, index) {
+									if(item.lineId == _tempData.lineNo) {
+										_tempArr.push(item)
+									}
+								})
+								_this.stations = _tempArr
+							} else {
+								mui.toast(success)
+							}
+						}, function(error) {
+							mui.toast(error)
+						})
+					})
+				},
+				methods: {
+					onTapSelectItem(station, index) {
+						setLsItem("selectStation", JSON.stringify(station))
 						mui.openWindow({
-							url:'selectAlertType.html',
-							id:'selectAlertType'
+							url: 'selectAlertType.html',
+							id: 'selectAlertType'
 						})
 					}
 				}

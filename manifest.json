@@ -131,7 +131,8 @@
 			"index.html": {
 				"resources": [],
 				"refer": [
-					"apps/htmls/main.html"
+					"apps/htmls/main.html",
+					"apps/htmls/setHost.html"
 				],
 				"priority": 0
 			},
@@ -140,7 +141,8 @@
 				"refer": [
 					"apps/htmls/callAlerts/selectStation.html",
 					"apps/htmls/dealAlerts/dealDetails.html",
-					"index.html"
+					"index.html",
+					"apps/htmls/callAlerts/selectAlertType.html"
 				],
 				"priority": 0
 			},
@@ -161,7 +163,22 @@
 			"apps/htmls/dealAlerts/dealDetails.html": {
 				"resources": [],
 				"refer": [
-					"apps/htmls/dealAlerts/handlingDetails.html"
+					"apps/htmls/dealAlerts/handlingDetails.html",
+					"apps/htmls/main.html"
+				],
+				"priority": 0
+			},
+			"apps/htmls/callAlerts/selectAlertDetails.html": {
+				"resources": [],
+				"refer": [
+					"apps/htmls/main.html"
+				],
+				"priority": 0
+			},
+			"apps/htmls/dealAlerts/handlingDetails.html": {
+				"resources": [],
+				"refer": [
+					"apps/htmls/main.html"
 				],
 				"priority": 0
 			}
