@@ -8,43 +8,28 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/setHost.css" />
 		<link rel="stylesheet" href="../../css/global.css" />
-		<style type="text/css">
-			html,body{
-				height: 100%;
-			}
-			.mui-content{
-				height: 100%;
-			}
-			.md-header-title-size {
-				font-size: 24px;
-			}
-			
-			.md-header-back-size {
-				font-size: 18px !important;
-			}
-		</style>
 	</head>
 
 	<body>
 
 		<div class="mui-content background" id="setting">
-			<header class="mui-bar mui-bar-nav" style="background-color: transparent;">
+			<header class="mui-bar mui-bar-nav md-trans" >
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left md-title-back-size">返回</a>
 				<h1 class="mui-title md-header-title-size" id="title" style="color: white;">设置账套</h1>
 				<div @tap="onTapPlus"><span class="mui-icon mui-icon-plus mui-pull-right md-title-plus"></span></div>
 			</header>
-			<div class="mui-content" style="background-color: transparent;">
-				<ul class="mui-table-view" id="hostList" style="background-color: transparent;">
+			<div class="mui-content md-trans">
+				<ul class="mui-table-view md-trans" id="hostList">
 					<li class="mui-table-view-cell classTem "  v-for="(host,index) in hosts" @tap="changeHost(host.ip)" v-bind:id="['slider'+host.id]">
 						<div class="mui-slider-right mui-disabled">
 							<a class="mui-btn mui-btn-blue" @tap="updateHost(host,index)">编辑</a>
 							<a class="mui-btn mui-btn-red" v-on:tap.stop="deletItem(host,index)">删除</a>
 						</div>
-						<div class="mui-slider-handle mui-table" style="background-color: transparent;color: white;">
+						<div class="mui-slider-handle mui-table md-trans" style="color: white;">
 							<div class="mui-table-cell" >
-								<div class="mui-input-row mui-radio mui-left" style="background-color: transparent;">
+								<div class="mui-input-row mui-radio mui-left md-trans">
 									<label>{{ host.ip }}</label>
-									<input style="background-color: transparent;" name="host" class="host" type="radio" :value="host.ip" :checked="host.isdemo" />
+									<input class="md-trans" name="host" class="host" type="radio" :value="host.ip" :checked="host.isdemo" />
 								</div>
 							</div>
 						</div>

@@ -1,42 +1,42 @@
 {
-	"index.html": {
-		"refer": [
-			"apps/htmls/main.html",
-			"apps/htmls/setHost.html"
-		]
-	},
-	"apps/htmls/main.html": {
-		"refer": [
-			"apps/htmls/callAlerts/selectStation.html",
-			"apps/htmls/dealAlerts/dealDetails.html",
-			"index.html",
-			"apps/htmls/callAlerts/selectAlertType.html"
-		]
-	},
-	"apps/htmls/callAlerts/selectStation.html": {
-		"refer": [
-			"apps/htmls/callAlerts/selectAlertType.html"
-		]
-	},
-	"apps/htmls/callAlerts/selectAlertType.html": {
-		"refer": [
-			"apps/htmls/callAlerts/selectAlertDetails.html"
-		]
-	},
-	"apps/htmls/dealAlerts/dealDetails.html": {
-		"refer": [
-			"apps/htmls/dealAlerts/handlingDetails.html",
-			"apps/htmls/main.html"
-		]
-	},
-	"apps/htmls/callAlerts/selectAlertDetails.html": {
-		"refer": [
-			"apps/htmls/main.html"
-		]
-	},
-	"apps/htmls/dealAlerts/handlingDetails.html": {
-		"refer": [
-			"apps/htmls/main.html"
-		]
-	}
+  "index.html": {
+    "refer": [
+      "apps/htmls/main.html",
+      "apps/htmls/setHost.html"
+    ]
+  },
+  "apps/htmls/main.html": {
+    "refer": [
+      "apps/htmls/callAlerts/selectStation.html",
+      "apps/htmls/dealAlerts/dealDetails.html",
+      "index.html",
+      "apps/htmls/callAlerts/selectAlertType.html"
+    ]
+  },
+  "apps/htmls/callAlerts/selectStation.html": {
+    "refer": [
+      "apps/htmls/callAlerts/selectAlertType.html"
+    ]
+  },
+  "apps/htmls/callAlerts/selectAlertType.html": {
+    "refer": [
+      "apps/htmls/callAlerts/selectAlertDetails.html"
+    ]
+  },
+  "apps/htmls/dealAlerts/dealDetails.html": {
+    "refer": [
+      "apps/htmls/dealAlerts/handlingDetails.html",
+      "apps/htmls/main.html"
+    ]
+  },
+  "apps/htmls/callAlerts/selectAlertDetails.html": {
+    "refer": [
+      "apps/htmls/main.html"
+    ]
+  },
+  "apps/htmls/dealAlerts/handlingDetails.html": {
+    "refer": [
+      "apps/htmls/main.html"
+    ]
+  }
 }

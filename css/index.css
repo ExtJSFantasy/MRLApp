@@ -1,0 +1,234 @@
+html,
+body {
+	height: 100%;
+}
+
+.mui-input-group {
+	position: relative;
+	padding: 0;
+	border: 0;
+	background-color: transparent;
+}
+
+.mui-input-group:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+}
+
+.mui-input-group:after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+}
+
+.mui-input-group .mui-input-row:after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 15px;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+}
+
+.mui-popup-inner {
+	position: relative;
+	padding: 15px;
+	border-radius: 13px 13px 0 0;
+	/* background: rgba(255,255,255,.95); */
+	background-color: rgba(21, 82, 136, 1);
+	color: white;
+}
+
+.mui-popup-button:first-child {
+	border-radius: 0 0 0 13px;
+	background-color: rgba(21, 82, 136, 1);
+	color: white;
+}
+
+.mui-popup-button:last-child {
+	border-radius: 0 0 13px;
+	background-color: rgba(21, 82, 136, 1);
+	color: white;
+}
+
+.mui-table-view:before {
+	position: absolute;
+	right: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+	top: -1px;
+}
+
+.mui-table-view:after {
+	position: absolute;
+	right: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+	top: -1px;
+}
+
+.mui-table-view-cell:after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 15px;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: transparent;
+}
+
+.label-input-arrow {
+	background: url(img/arrow.png) right center no-repeat !important;
+}
+
+.md-center {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: Center;
+}
+
+.md-center-form {
+	width: 60%;
+	height: 40%;
+}
+
+.md-input-group {
+	border: solid 1px white;
+	border-radius: 50px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.md-input-group:last-child {
+	/*margin-bottom: 40px;*/
+}
+
+.md-label-input-split {
+	width: 20% !important;
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-right-color: white;
+}
+
+.md-input-width {
+	width: 75% !important;
+}
+
+.md-btn-out {
+	width: 100%;
+	margin-top: 40px;
+}
+
+.md-btn-inner {
+	width: 100%;
+	height: 45px;
+	margin: auto;
+	border: 1px solid rgba(255, 102, 52, 1);
+	border-radius: 50px;
+	background-color: rgba(255, 102, 52, 1);
+}
+
+#workshop {
+	position: absolute;
+	left: 5% !important;
+	top: 15%;
+	width: 90%;
+	height: 70%;
+}
+
+#line {
+	position: absolute;
+	left: 5% !important;
+	top: 15%;
+	width: 90%;
+	height: 70%;
+}
+
+#station {
+	position: absolute;
+	left: 5% !important;
+	top: 15%;
+	width: 90%;
+	height: 70%;
+}
+
+.header-font-weight {
+	color: white;
+	font-size: 24px;
+}
+
+ul,
+menu,
+dir {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}
+
+.mui-table-view-cell.mui-active {
+	background-color: rgba(102, 254, 203, 1);
+}
+
+.popver-card {
+	height: 97%;
+	background-color: transparent;
+}
+
+.md-scroll-wrapper {
+	height: 100%;
+	padding-top: 40px;
+}
+
+.md-table-view {
+	font-size: 1.5rem;
+	background-color: transparent !important;
+}
+
+.md-radio {
+	color: white;
+	border: solid 1px white;
+	border-radius: 20px;
+}
+
+.md-input-radio {
+	font-size: 2rem;
+}
+
+.md-setting-btn {
+	width: 50%;
+	margin: auto;
+	margin-top: 10px;
+	border-radius: 10px;
+}

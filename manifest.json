@@ -66,7 +66,7 @@
 			"icons": {
 				"ios": {
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
-					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					 /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
 						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
 						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
@@ -88,14 +88,14 @@
 						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
 						"settings-retina": ""
-					}
+					},"appstore":"C:/Users/TK/Desktop/drawable-xxhdpi-icon.png"
 				},
 				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
+					"mdpi": "C:/Users/TK/Desktop/drawable-xxhdpi-icon.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "C:/Users/TK/Desktop/drawable-xxhdpi-icon.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "C:/Users/TK/Desktop/drawable-xxhdpi-icon.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "C:/Users/TK/Desktop/drawable-xxhdpi-icon.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "C:/Users/TK/Desktop/drawable-xxhdpi-icon.png","xxxhdpi":"C:/Users/TK/Desktop/drawable-xxhdpi-icon.png"
 				}
 			},
 			"splashscreen": {
@@ -119,9 +119,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"hdpi": "C:/Users/TK/Desktop/drawable-port-hdpi-screen.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/TK/Desktop/drawable-port-xhdpi-screen.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/TK/Desktop/drawable-land-xxxhdpi-screen.png"
 				}
 			}
 		}
